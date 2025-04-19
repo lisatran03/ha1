@@ -127,7 +127,33 @@ class CalculatorTest {
         String result2 = calc.readScreen();
         assertEquals("22", result2);
 
+        calc.pressEqualsKey();
+
+        String result3 = calc.readScreen();
+        assertEquals("24", result3);
+
     }
+
+    @Test
+    @DisplayName("should reset completely after tapping double c")
+    void testDoubleClear() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(6);
+        calc.pressBinaryOperationKey("x");
+        calc.pressClearKey();
+        calc.pressClearKey();
+        calc.pressDigitKey(2);
+        calc.pressEqualsKey();
+
+        String expected = "2";
+        String actual = calc.readScreen();
+
+        assertEquals(expected, actual);
+
+    }
+
+
 
 }
 
