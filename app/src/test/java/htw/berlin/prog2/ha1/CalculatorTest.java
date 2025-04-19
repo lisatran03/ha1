@@ -108,6 +108,26 @@ class CalculatorTest {
 
     }
 
+    @Test
+    @DisplayName("should display results after clicking equal signs multiple times")
+    void testRepeatedEqualSigns() {
+        Calculator calc = new Calculator();
+
+        calc.pressDigitKey(1);
+        calc.pressDigitKey(8);
+        calc.pressBinaryOperationKey("+");
+        calc.pressDigitKey(2);
+        calc.pressEqualsKey();
+
+        String result1 = calc.readScreen();
+        assertEquals("20", result1);
+
+        calc.pressEqualsKey();
+
+        String result2 = calc.readScreen();
+        assertEquals("22", result2);
+
+    }
 
 }
 
