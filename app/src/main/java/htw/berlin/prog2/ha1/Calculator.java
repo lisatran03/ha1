@@ -105,9 +105,12 @@ public class Calculator {
      * Fügt beim ersten Mal Drücken dem aktuellen Bildschirminhalt das Trennzeichen auf der rechten
      * Seite hinzu und aktualisiert den Bildschirm. Daraufhin eingegebene Zahlen werden rechts vom
      * Trennzeichen angegeben und daher als Dezimalziffern interpretiert.
+     * Drückt man nach einem Error die Dezimaltrennzeichentaste "." und dann eine Zahl, wird diese
+     * als Dezimalzahl dargestellt.
      * Beim zweimaligem Drücken, oder wenn bereits ein Trennzeichen angezeigt wird, passiert nichts.
      */
     public void pressDotKey() {
+        if (screen.equals("Error")) screen = "0";
         if (!screen.contains(".")) screen = screen + ".";
     }
 
@@ -132,7 +135,7 @@ public class Calculator {
      * und das Ergebnis direkt angezeigt.
      */
    public void pressEqualsKey() {
-           if (latestOperation.isEmpty()) return; // NEU: abbrechen, wenn nichts zu rechnen ist
+           if (latestOperation.isEmpty()) return;
 
            var result = switch(latestOperation) {
             case "+" -> latestValue + Double.parseDouble(screen);
@@ -146,6 +149,6 @@ public class Calculator {
         if(screen.equals("Infinity")) screen = "Error";
         if(screen.endsWith(".0")) screen = screen.substring(0,screen.length()-2);
         if(screen.contains(".") && screen.length() > 11) screen = screen.substring(0, 10);
-    }
 
+    }
 }
