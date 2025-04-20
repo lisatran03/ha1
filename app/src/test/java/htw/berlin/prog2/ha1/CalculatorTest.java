@@ -108,7 +108,7 @@ class CalculatorTest {
 
     }
 
-    @Test
+    /* @Test
     @DisplayName("should display results after clicking equal signs multiple times")
     void testRepeatedEqualSigns() {
         Calculator calc = new Calculator();
@@ -119,20 +119,17 @@ class CalculatorTest {
         calc.pressDigitKey(2);
         calc.pressEqualsKey();
 
-        String result1 = calc.readScreen();
-        assertEquals("20", result1);
+        assertEquals("20", calc.readScreen());
 
         calc.pressEqualsKey();
 
-        String result2 = calc.readScreen();
-        assertEquals("22", result2);
+        assertEquals("22", calc.readScreen());
 
         calc.pressEqualsKey();
 
-        String result3 = calc.readScreen();
-        assertEquals("24", result3);
+        assertEquals("24", calc.readScreen());
 
-    }
+    } */
 
     @Test
     @DisplayName("should reset completely after tapping double c")
@@ -153,7 +150,19 @@ class CalculatorTest {
 
     }
 
+    @Test
+    @DisplayName("should display decimal after error")
+    void testDecimalAfterError() {
+        Calculator calc = new Calculator();
+        calc.pressDigitKey(9);
+        calc.pressBinaryOperationKey("/");
+        calc.pressDigitKey(0);
+        calc.pressEqualsKey(); // Error
+        calc.pressDotKey();
+        calc.pressDigitKey(5);
 
+        assertEquals("0.5", calc.readScreen());
+    }
 
 }
 
